@@ -1,0 +1,34 @@
+
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract Mob Fusion
+        run: unzip -q Mob-Fusion-Fabric-1.20.1-Source.zip
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+
+      - name: Build Mob Fusion
+        run: gradle build
+        working-directory: Mob-Fusion-Fabric-1.20.1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mob-Fusion-Fabric-1.20.1
+          path: Mob-Fusion-Fabric-1.20.1/build/libs/*.jar
