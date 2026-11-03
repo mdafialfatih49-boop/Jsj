@@ -22,13 +22,13 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.8
+          gradle-version: 8.5
 
       - name: Build Mob Fusion
         run: gradle build
-        working-directory: Mob-Fusion-Fabric-1.20.1
+        working-directory: mobfusion-project
 
       - uses: actions/upload-artifact@v4
         with:
           name: Mob-Fusion-Fabric-1.20.1
-          path: Mob-Fusion-Fabric-1.20.1/build/libs/*.jar
+          path: mobfusion-project/build/libs/*.jar
